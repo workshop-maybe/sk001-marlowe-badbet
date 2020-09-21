@@ -7,7 +7,7 @@ When
             )
             (Role "player1")
             (Token "" "")
-            (Constant 15)
+            (Constant 20)
         )
         (When
             [Case
@@ -18,7 +18,7 @@ When
                     )
                     (Role "player2")
                     (Token "" "")
-                    (Constant 15)
+                    (Constant 20)
                 )
                 (When
                     [Case
