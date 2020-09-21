@@ -7,3 +7,4 @@ To use this file
 * Paste to https://alpha.marlowe.iohkdev.io/#/simulation
 * Click on the "Send Contract to Blockly" icon
 * Revise this contract to handle cases when parties disagree.
+* When you're done, you can open a pull request to submit your changes to this contract.
