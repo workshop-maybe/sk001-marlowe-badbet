@@ -1,24 +1,18 @@
 When
     [Case
         (Deposit
-            (AccountId
-                0
-                (PK "ourbet")
-            )
+            (PK "ourbet")
             (Role "player1")
             (Token "" "")
-            (Constant 15)
+            (Constant 100)
         )
         (When
             [Case
                 (Deposit
-                    (AccountId
-                        0
-                        (PK "ourbet")
-                    )
+                    (PK "ourbet")
                     (Role "player2")
                     (Token "" "")
-                    (Constant 15)
+                    (Constant 100)
                 )
                 (When
                     [Case
@@ -61,41 +55,44 @@ When
                                             (Constant 1)
                                         )
                                         (Pay
-                                            (AccountId
-                                                0
-                                                (PK "ourbet")
-                                            )
+                                            (PK "ourbet")
                                             (Party (Role "player1"))
                                             (Token "" "")
-                                            (Constant 30)
+                                            (Constant 200)
                                             Close 
                                         )
                                         (Pay
-                                            (AccountId
-                                                0
-                                                (PK "ourbet")
-                                            )
+                                            (PK "ourbet")
                                             (Party (Role "player2"))
                                             (Token "" "")
-                                            (Constant 30)
+                                            (Constant 200)
                                             Close 
                                         )
                                     )
-                                    Close 
+                                    (Pay
+                                        (PK "ourbet")
+                                        (Party (Role "player1"))
+                                        (Token "" "")
+                                        (Constant 100)
+                                        (Pay
+                                            (PK "ourbet")
+                                            (Party (Role "player2"))
+                                            (Token "" "")
+                                            (Constant 100)
+                                            Close 
+                                        )
+                                    )
                                 )]
-                            100 Close 
+                            120 Close 
                         )]
                     100 Close 
                 )]
             30
             (Pay
-                (AccountId
-                    0
-                    (PK "ourbet")
-                )
+                (PK "ourbet")
                 (Party (Role "player1"))
                 (Token "" "")
-                (Constant 15)
+                (Constant 100)
                 Close 
             )
         )]
