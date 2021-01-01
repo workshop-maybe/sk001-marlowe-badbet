@@ -69,7 +69,19 @@ When
                                             Close 
                                         )
                                     )
-                                    Close 
+                                    (Pay
+                                        (Role "outbet")
+                                        (Party (Role "player1"))
+                                        (Token "" "")
+                                        (Constant 10)
+                                        (Pay
+                                            (Role "outbet")
+                                            (Party (Role "player2"))
+                                            (Token "" "")
+                                            (Constant 10)
+                                            Close 
+                                        )
+                                    )
                                 )]
                             100 Close 
                         )]
