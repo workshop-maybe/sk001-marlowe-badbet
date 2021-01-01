@@ -1,102 +1,204 @@
 When
     [Case
-        (Deposit
-            (AccountId
-                0
-                (PK "ourbet")
+        (Choice
+            (ChoiceId
+                "stake"
+                (Role "player1")
             )
-            (Role "player1")
-            (Token "" "")
-            (Constant 15)
+            [Bound 1 20]
         )
         (When
             [Case
                 (Deposit
-                    (AccountId
-                        0
-                        (PK "ourbet")
-                    )
-                    (Role "player2")
+                    (Role "outbet")
+                    (Role "player1")
                     (Token "" "")
-                    (Constant 15)
+                    (ChoiceValue
+                        (ChoiceId
+                            "stake"
+                            (Role "player1")
+                        ))
                 )
                 (When
                     [Case
-                        (Choice
-                            (ChoiceId
-                                "outcome"
-                                (Role "player1")
-                            )
-                            [Bound 1 2]
+                        (Deposit
+                            (Role "outbet")
+                            (Role "player2")
+                            (Token "" "")
+                            (ChoiceValue
+                                (ChoiceId
+                                    "stake"
+                                    (Role "player1")
+                                ))
                         )
                         (When
                             [Case
                                 (Choice
                                     (ChoiceId
                                         "outcome"
-                                        (Role "player2")
+                                        (Role "player1")
                                     )
                                     [Bound 1 2]
                                 )
-                                (If
-                                    (ValueEQ
-                                        (ChoiceValue
-                                            (ChoiceId
-                                                "outcome"
-                                                (Role "player1")
-                                            ))
-                                        (ChoiceValue
+                                (When
+                                    [Case
+                                        (Choice
                                             (ChoiceId
                                                 "outcome"
                                                 (Role "player2")
-                                            ))
-                                    )
-                                    (If
-                                        (ValueEQ
+                                            )
+                                            [Bound 1 2]
+                                        )
+                                        (If
+                                            (ValueEQ
+                                                (ChoiceValue
+                                                    (ChoiceId
+                                                        "outcome"
+                                                        (Role "player1")
+                                                    ))
+                                                (ChoiceValue
+                                                    (ChoiceId
+                                                        "outcome"
+                                                        (Role "player2")
+                                                    ))
+                                            )
+                                            (If
+                                                (ValueEQ
+                                                    (ChoiceValue
+                                                        (ChoiceId
+                                                            "outcome"
+                                                            (Role "player1")
+                                                        ))
+                                                    (Constant 1)
+                                                )
+                                                (Pay
+                                                    (Role "outbet")
+                                                    (Party (Role "player1"))
+                                                    (Token "" "")
+                                                    (MulValue
+                                                        (ChoiceValue
+                                                            (ChoiceId
+                                                                "stake"
+                                                                (Role "player1")
+                                                            ))
+                                                        (Constant 2)
+                                                    )
+                                                    Close 
+                                                )
+                                                (Pay
+                                                    (Role "outbet")
+                                                    (Party (Role "player2"))
+                                                    (Token "" "")
+                                                    (MulValue
+                                                        (ChoiceValue
+                                                            (ChoiceId
+                                                                "stake"
+                                                                (Role "player1")
+                                                            ))
+                                                        (Constant 2)
+                                                    )
+                                                    Close 
+                                                )
+                                            )
+                                            (Pay
+                                                (Role "outbet")
+                                                (Party (Role "player1"))
+                                                (Token "" "")
+                                                (SubValue
+                                                    (ChoiceValue
+                                                        (ChoiceId
+                                                            "stake"
+                                                            (Role "player1")
+                                                        ))
+                                                    (Constant 1)
+                                                )
+                                                (Pay
+                                                    (Role "outbet")
+                                                    (Party (Role "player2"))
+                                                    (Token "" "")
+                                                    (SubValue
+                                                        (ChoiceValue
+                                                            (ChoiceId
+                                                                "stake"
+                                                                (Role "player1")
+                                                            ))
+                                                        (Constant 1)
+                                                    )
+                                                    Close 
+                                                )
+                                            )
+                                        )]
+                                    100
+                                    (Pay
+                                        (Role "outbet")
+                                        (Party (Role "player1"))
+                                        (Token "" "")
+                                        (SubValue
                                             (ChoiceValue
                                                 (ChoiceId
-                                                    "outcome"
+                                                    "stake"
                                                     (Role "player1")
                                                 ))
                                             (Constant 1)
                                         )
                                         (Pay
-                                            (AccountId
-                                                0
-                                                (PK "ourbet")
-                                            )
-                                            (Party (Role "player1"))
-                                            (Token "" "")
-                                            (Constant 30)
-                                            Close 
-                                        )
-                                        (Pay
-                                            (AccountId
-                                                0
-                                                (PK "ourbet")
-                                            )
+                                            (Role "outbet")
                                             (Party (Role "player2"))
                                             (Token "" "")
-                                            (Constant 30)
+                                            (SubValue
+                                                (ChoiceValue
+                                                    (ChoiceId
+                                                        "stake"
+                                                        (Role "player1")
+                                                    ))
+                                                (Constant 1)
+                                            )
                                             Close 
                                         )
                                     )
-                                    Close 
                                 )]
-                            100 Close 
+                            100
+                            (Pay
+                                (Role "outbet")
+                                (Party (Role "player1"))
+                                (Token "" "")
+                                (SubValue
+                                    (ChoiceValue
+                                        (ChoiceId
+                                            "stake"
+                                            (Role "player1")
+                                        ))
+                                    (Constant 1)
+                                )
+                                (Pay
+                                    (Role "outbet")
+                                    (Party (Role "player2"))
+                                    (Token "" "")
+                                    (SubValue
+                                        (ChoiceValue
+                                            (ChoiceId
+                                                "stake"
+                                                (Role "player1")
+                                            ))
+                                        (Constant 1)
+                                    )
+                                    Close 
+                                )
+                            )
                         )]
-                    100 Close 
+                    30
+                    (Pay
+                        (Role "outbet")
+                        (Party (Role "player1"))
+                        (Token "" "")
+                        (ChoiceValue
+                            (ChoiceId
+                                "stake"
+                                (Role "player1")
+                            ))
+                        Close 
+                    )
                 )]
-            30
-            (Pay
-                (AccountId
-                    0
-                    (PK "ourbet")
-                )
-                (Party (Role "player1"))
-                (Token "" "")
-                (Constant 15)
-                Close 
-            )
+            20 Close 
         )]
     20 Close 
