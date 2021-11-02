@@ -1,7 +1,7 @@
 When
     [Case
         (Deposit
-            (Role "outbet")
+            (Role "ourbet")
             (Role "player1")
             (Token "" "")
             (Constant 15)
@@ -9,7 +9,7 @@ When
         (When
             [Case
                 (Deposit
-                    (Role "outbet")
+                    (Role "ourbet")
                     (Role "player2")
                     (Token "" "")
                     (Constant 15)
@@ -55,14 +55,14 @@ When
                                             (Constant 1)
                                         )
                                         (Pay
-                                            (Role "outbet")
+                                            (Role "ourbet")
                                             (Party (Role "player1"))
                                             (Token "" "")
                                             (Constant 30)
                                             Close 
                                         )
                                         (Pay
-                                            (Role "outbet")
+                                            (Role "ourbet")
                                             (Party (Role "player2"))
                                             (Token "" "")
                                             (Constant 30)
@@ -70,15 +70,15 @@ When
                                         )
                                     )
                                     (Pay
-                                        (Role "outbet")
+                                        (Role "ourbet")
                                         (Party (Role "player1"))
                                         (Token "" "")
-                                        (Constant 10)
+                                        (Constant 15)
                                         (Pay
-                                            (Role "outbet")
+                                            (Role "ourbet")
                                             (Party (Role "player2"))
                                             (Token "" "")
-                                            (Constant 10)
+                                            (Constant 15)
                                             Close 
                                         )
                                     )
@@ -87,6 +87,13 @@ When
                         )]
                     100 Close 
                 )]
-            30 Close 
+            30
+            (Pay
+                (Role "ourbet")
+                (Party (Role "player1"))
+                (Token "" "")
+                (Constant 15)
+                Close 
+            )
         )]
     20 Close 
