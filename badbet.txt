@@ -1,7 +1,7 @@
 When
     [Case
         (Deposit
-            (Role "ourbet")
+            (Role "outbet")
             (Role "player1")
             (Token "" "")
             (Constant 15)
@@ -9,73 +9,131 @@ When
         (When
             [Case
                 (Deposit
-                    (Role "ourbet")
-                    (Role "player2")
+                    (Role "collateral")
+                    (Role "player1")
                     (Token "" "")
-                    (Constant 15)
+                    (Constant 5)
                 )
                 (When
                     [Case
-                        (Choice
-                            (ChoiceId
-                                "outcome"
-                                (Role "player1")
-                            )
-                            [Bound 1 2]
+                        (Deposit
+                            (Role "outbet")
+                            (Role "player2")
+                            (Token "" "")
+                            (Constant 15)
                         )
                         (When
                             [Case
-                                (Choice
-                                    (ChoiceId
-                                        "outcome"
-                                        (Role "player2")
-                                    )
-                                    [Bound 1 2]
+                                (Deposit
+                                    (Role "collateral")
+                                    (Role "player2")
+                                    (Token "" "")
+                                    (Constant 5)
                                 )
-                                (If
-                                    (ValueEQ
-                                        (ChoiceValue
+                                (When
+                                    [Case
+                                        (Choice
                                             (ChoiceId
                                                 "outcome"
                                                 (Role "player1")
-                                            ))
-                                        (ChoiceValue
-                                            (ChoiceId
-                                                "outcome"
-                                                (Role "player2")
-                                            ))
-                                    )
-                                    (If
-                                        (ValueEQ
-                                            (ChoiceValue
-                                                (ChoiceId
-                                                    "outcome"
-                                                    (Role "player1")
-                                                ))
-                                            (Constant 1)
+                                            )
+                                            [Bound 1 2]
                                         )
-                                        (Pay
-                                            (Role "ourbet")
-                                            (Party (Role "player1"))
-                                            (Token "" "")
-                                            (Constant 30)
-                                            Close 
-                                        )
-                                        (Pay
-                                            (Role "ourbet")
-                                            (Party (Role "player2"))
-                                            (Token "" "")
-                                            (Constant 30)
-                                            Close 
-                                        )
-                                    )
+                                        (When
+                                            [Case
+                                                (Choice
+                                                    (ChoiceId
+                                                        "outcome"
+                                                        (Role "player2")
+                                                    )
+                                                    [Bound 1 2]
+                                                )
+                                                (If
+                                                    (ValueEQ
+                                                        (ChoiceValue
+                                                            (ChoiceId
+                                                                "outcome"
+                                                                (Role "player1")
+                                                            ))
+                                                        (ChoiceValue
+                                                            (ChoiceId
+                                                                "outcome"
+                                                                (Role "player2")
+                                                            ))
+                                                    )
+                                                    (If
+                                                        (ValueEQ
+                                                            (ChoiceValue
+                                                                (ChoiceId
+                                                                    "outcome"
+                                                                    (Role "player1")
+                                                                ))
+                                                            (Constant 1)
+                                                        )
+                                                        (Pay
+                                                            (Role "outbet")
+                                                            (Party (Role "player1"))
+                                                            (Token "" "")
+                                                            (Constant 30)
+                                                            (Pay
+                                                                (Role "collateral")
+                                                                (Party (Role "player1"))
+                                                                (Token "" "")
+                                                                (Constant 5)
+                                                                (Pay
+                                                                    (Role "collateral")
+                                                                    (Party (Role "player2"))
+                                                                    (Token "" "")
+                                                                    (Constant 5)
+                                                                    Close 
+                                                                )
+                                                            )
+                                                        )
+                                                        (Pay
+                                                            (Role "outbet")
+                                                            (Party (Role "player2"))
+                                                            (Token "" "")
+                                                            (Constant 30)
+                                                            (Pay
+                                                                (Role "collateral")
+                                                                (Party (Role "player1"))
+                                                                (Token "" "")
+                                                                (Constant 5)
+                                                                (Pay
+                                                                    (Role "collateral")
+                                                                    (Party (Role "player2"))
+                                                                    (Token "" "")
+                                                                    (Constant 5)
+                                                                    Close 
+                                                                )
+                                                            )
+                                                        )
+                                                    )
+                                                    Close 
+                                                )]
+                                            100
+                                            (Pay
+                                                (Role "outbet")
+                                                (Party (Role "player1"))
+                                                (Token "" "")
+                                                (Constant 30)
+                                                (Pay
+                                                    (Role "collateral")
+                                                    (Party (Role "player1"))
+                                                    (Token "" "")
+                                                    (Constant 10)
+                                                    Close 
+                                                )
+                                            )
+                                        )]
+                                    100
                                     (Pay
-                                        (Role "ourbet")
+                                        (Role "outbet")
                                         (Party (Role "player1"))
                                         (Token "" "")
                                         (Constant 15)
                                         (Pay
-                                            (Role "ourbet")
+                                            (Role "outbet")
                                             (Party (Role "player2"))
                                             (Token "" "")
                                             (Constant 15)
@@ -83,13 +141,45 @@ When
                                         )
                                     )
                                 )]
-                            100 Close 
+                            20
+                            (Pay
+                                (Role "outbet")
+                                (Party (Role "player1"))
+                                (Token "" "")
+                                (Constant 15)
+                                (Pay
+                                    (Role "collateral")
+                                    (Party (Role "player1"))
+                                    (Token "" "")
+                                    (Constant 5)
+                                    (Pay
+                                        (Role "outbet")
+                                        (Party (Role "player2"))
+                                        (Token "" "")
+                                        (Constant 15)
+                                        Close 
+                                    )
+                                )
+                            )
                         )]
-                    100 Close 
+                    20
+                    (Pay
+                        (Role "outbet")
+                        (Party (Role "player1"))
+                        (Token "" "")
+                        (Constant 15)
+                        (Pay
+                            (Role "collateral")
+                            (Party (Role "player1"))
+                            (Token "" "")
+                            (Constant 5)
+                            Close 
+                        )
+                    )
                 )]
-            30
+            20
             (Pay
-                (Role "ourbet")
+                (Role "outbet")
                 (Party (Role "player1"))
                 (Token "" "")
                 (Constant 15)
