@@ -1,16 +1,16 @@
 When
     [Case
         (Deposit
-            (Role "ourbet")
-            (Role "player1")
+            (PK "add001")
+            (Role "jugador1")
             (Token "" "")
             (Constant 15)
         )
         (When
             [Case
                 (Deposit
-                    (Role "ourbet")
-                    (Role "player2")
+                    (PK "add001")
+                    (Role "jugador2")
                     (Token "" "")
                     (Constant 15)
                 )
@@ -18,8 +18,8 @@ When
                     [Case
                         (Choice
                             (ChoiceId
-                                "outcome"
-                                (Role "player1")
+                                "resultado"
+                                (Role "jugador1")
                             )
                             [Bound 1 2]
                         )
@@ -27,8 +27,8 @@ When
                             [Case
                                 (Choice
                                     (ChoiceId
-                                        "outcome"
-                                        (Role "player2")
+                                        "resultado"
+                                        (Role "jugador2")
                                     )
                                     [Bound 1 2]
                                 )
@@ -36,64 +36,67 @@ When
                                     (ValueEQ
                                         (ChoiceValue
                                             (ChoiceId
-                                                "outcome"
-                                                (Role "player1")
+                                                "resultado"
+                                                (Role "jugador1")
                                             ))
                                         (ChoiceValue
                                             (ChoiceId
-                                                "outcome"
-                                                (Role "player2")
+                                                "resultado"
+                                                (Role "jugador2")
                                             ))
                                     )
                                     (If
                                         (ValueEQ
                                             (ChoiceValue
                                                 (ChoiceId
-                                                    "outcome"
-                                                    (Role "player1")
+                                                    "resultado"
+                                                    (Role "jugador1")
                                                 ))
                                             (Constant 1)
                                         )
                                         (Pay
-                                            (Role "ourbet")
-                                            (Party (Role "player1"))
+                                            (PK "add001")
+                                            (Party (Role "jugador1"))
                                             (Token "" "")
                                             (Constant 30)
                                             Close 
                                         )
                                         (Pay
-                                            (Role "ourbet")
-                                            (Party (Role "player2"))
+                                            (PK "add001")
+                                            (Party (Role "jugador2"))
                                             (Token "" "")
                                             (Constant 30)
                                             Close 
                                         )
                                     )
                                     (Pay
-                                        (Role "ourbet")
-                                        (Party (Role "player1"))
+                                        (PK "add001")
+                                        (Party (Role "jugador1"))
                                         (Token "" "")
                                         (Constant 15)
                                         (Pay
-                                            (Role "ourbet")
-                                            (Party (Role "player2"))
+                                            (PK "add001")
+                                            (Party (Role "jugador2"))
                                             (Token "" "")
                                             (Constant 15)
                                             Close 
                                         )
                                     )
                                 )]
-                            100 Close 
+                            (TimeParam "100")
+                            Close 
                         )]
-                    100 Close 
+                    (TimeParam "100")
+                    Close 
                 )]
-            30
+            (TimeParam "30")
             (Pay
-                (Role "ourbet")
-                (Party (Role "player1"))
+                (PK "add001")
+                (Party (Role "jugador1"))
                 (Token "" "")
                 (Constant 15)
                 Close 
             )
         )]
-    20 Close 
+    (TimeParam "10")
+    Close 
